@@ -1,11 +1,11 @@
-package com.example.neupanesushant.RestTutorial.service;
+package com.example.neupanesushant.RestTutorial.course.service;
 
-import com.example.neupanesushant.RestTutorial.model.Course;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.neupanesushant.RestTutorial.course.model.Course;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface CourseService {
     public List<Course> getCourses();
 

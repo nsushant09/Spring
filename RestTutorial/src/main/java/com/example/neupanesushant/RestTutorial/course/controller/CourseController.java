@@ -1,11 +1,10 @@
-package com.example.neupanesushant.RestTutorial.controller;
+package com.example.neupanesushant.RestTutorial.course.controller;
 
-import com.example.neupanesushant.RestTutorial.model.Course;
-import com.example.neupanesushant.RestTutorial.service.CourseService;
+import com.example.neupanesushant.RestTutorial.course.model.Course;
+import com.example.neupanesushant.RestTutorial.course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
