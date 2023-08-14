@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class CourseController {
@@ -21,8 +23,16 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/courses/{courseId}", method = RequestMethod.GET)
-    public Course getCourse(@PathVariable String courseId) {
-        return this.courseService.getCourse(Long.parseLong(courseId));
+    public ResponseEntity<HashMap<String, Course>> getCourse(@PathVariable String courseId) {
+        Course course = this.courseService.getCourse(Long.parseLong(courseId));
+        Course nextCourse = this.courseService.getCourse(Long.parseLong(courseId) + 10);
+        HashMap<String, Course> response = new HashMap<>();
+        {
+            response.put("course", course);
+            response.put("nextCourse", nextCourse);
+        }
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/courses", method = RequestMethod.POST)
