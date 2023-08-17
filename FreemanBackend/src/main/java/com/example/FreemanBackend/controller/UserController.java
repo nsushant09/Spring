@@ -28,8 +28,8 @@ public class UserController {
         return ResponseEntity.ok(responseUser);
     }
 
-    @GetMapping("/email={email}&password={password}")
-    public ResponseEntity<User> getUser(@PathVariable String email, @PathVariable String password) {
+    @GetMapping("/")
+    public ResponseEntity<User> getUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         User responseUser = userService.getUser(email, password);
         return ResponseEntity.ok(responseUser);
     }
