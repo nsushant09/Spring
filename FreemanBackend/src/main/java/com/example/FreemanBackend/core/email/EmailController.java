@@ -18,7 +18,7 @@ public class EmailController {
     EmailService otpMailService;
 
     @RequestMapping(value = "/mail/email={toEmail}", method = RequestMethod.GET)
-    public ResponseEntity<HashMap<String, String>> sendEmail(@PathVariable String toEmail) {
+    public ResponseEntity<HashMap<String, String>> sendOTPEmail(@PathVariable String toEmail) {
         HashMap<String, String> mailResponse = otpMailService.sendEmail(toEmail);
         return new ResponseEntity<>(mailResponse, HttpStatus.OK);
     }

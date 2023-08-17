@@ -32,10 +32,10 @@ public class OTPEmailService implements EmailService {
             helper.setText(getEmailContent(), true);
             mailSender.send(message);
 
-            response.put("isSent", "true");
+            response.put("Success", "true");
             response.put("authenticationKey", authenticationKey);
         } catch (Exception e) {
-            response.put("isSent", "false");
+            response.put("Success", "false");
             response.put("authenticationKey", "false");
         }
 
