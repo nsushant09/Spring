@@ -16,4 +16,11 @@ public class User {
     public String phoneNumber;
     public String dateOfBirth;
     public String role;
+
+    public void convertToDTO() {
+        this.password = null;
+        this.dateOfBirth = null;
+        this.gender = null;
+        this.role = null;
+    }
 }

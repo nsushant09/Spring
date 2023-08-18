@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("")
+    @PostMapping("/insert")
     public ResponseEntity<User> insertUser(@RequestBody User user) {
         User responseUser = userService.insertUser(user);
         return ResponseEntity.ok(responseUser);
@@ -28,7 +28,7 @@ public class UserController {
         return ResponseEntity.ok(responseUser);
     }
 
-    @GetMapping("/")
+    @GetMapping("/by_user_detail")
     public ResponseEntity<User> getUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         User responseUser = userService.getUser(email, password);
         return ResponseEntity.ok(responseUser);

@@ -1,6 +1,7 @@
 package com.example.FreemanBackend.model;
 
 import com.example.FreemanBackend.core.Constants;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,5 +16,19 @@ public class Product {
     public Double price;
     public Integer stock;
     public Double discountedPrice;
-    public Integer userId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    public User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id")
+    public Category category;
+
+    public void convertToDTO(){
+        if(this.user == null)
+            return;
+
+        this.user.convertToDTO();
+    }
 }
