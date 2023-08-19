@@ -11,7 +11,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     public String name;
-
+    public String imagePath;
     public String description;
     public Double price;
     public Integer stock;
@@ -25,8 +25,8 @@ public class Product {
     @JoinColumn(name = "category_id")
     public Category category;
 
-    public void convertToDTO(){
-        if(this.user == null)
+    public void convertToDTO() {
+        if (this.user == null)
             return;
 
         this.user.convertToDTO();

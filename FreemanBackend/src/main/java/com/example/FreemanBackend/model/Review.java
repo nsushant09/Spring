@@ -16,9 +16,23 @@ public class Review {
     public Date date;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user;
+    public User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
-    private Product product;
+    public Product product;
+
+    public void convertToDTO() {
+        if (this.user == null)
+            return;
+
+        this.user.convertToDTO();
+    }
 }
+
+/**
+ * Model : Entity,
+ * Controller : Handles Request
+ * Services : Business Logic, Handles Data or Filters Data
+ * Repository : Connects and fetches data from database
+ */

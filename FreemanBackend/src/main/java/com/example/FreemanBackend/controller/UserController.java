@@ -16,8 +16,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping("/insert")
-    public ResponseEntity<User> insertUser(@RequestBody User user) {
+    public ResponseEntity<?> insertUser(@RequestBody User user) {
+
+        if(userService.existsByEmail(user.email))
+            return ResponseEntity.badRequest().body("User with the provided email already exists");
+
         User responseUser = userService.insertUser(user);
         return ResponseEntity.ok(responseUser);
     }
@@ -29,8 +34,14 @@ public class UserController {
     }
 
     @GetMapping("/by_user_detail")
-    public ResponseEntity<User> getUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+    public ResponseEntity<?> getUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+        if(!userService.existsByEmail(email))
+            return ResponseEntity.badRequest().body("User with the provided email does not exists");
+
         User responseUser = userService.getUser(email, password);
+        if(responseUser == null)
+            return ResponseEntity.badRequest().body("Invalid Password.");
+
         return ResponseEntity.ok(responseUser);
     }
 
