@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
 
-    @PostMapping("/insert")
+    @PostMapping("/")
     public ResponseEntity<?> insertUser(@RequestBody User user) {
 
         if(userService.existsByEmail(user.email))
@@ -27,7 +27,7 @@ public class UserController {
         return ResponseEntity.ok(responseUser);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         User responseUser = userService.updateUser(user);
         return ResponseEntity.ok(responseUser);

@@ -25,7 +25,7 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/insert")
+    @PostMapping("/")
     public ResponseEntity<Product> insertProduct(@RequestParam("user_id") Integer userId, @RequestParam("category_id") Integer categoryId, @RequestBody Product product){
         product.category = categoryService.getCategoryById(categoryId);
         product.user = userService.getUserById(userId);
@@ -33,7 +33,7 @@ public class ProductController {
         return ResponseEntity.ok(responseProduct);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product){
         Product responseProduct = productService.insertProduct(product);
         return ResponseEntity.ok(responseProduct);

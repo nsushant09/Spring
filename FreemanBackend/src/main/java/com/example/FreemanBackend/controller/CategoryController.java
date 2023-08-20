@@ -18,12 +18,12 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @PostMapping("/insert")
+    @PostMapping("/")
     public ResponseEntity<Category> insertCategory(@RequestBody Category category){
         return ResponseEntity.ok(categoryService.insertCategory(category));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/")
     public ResponseEntity<Category> updateCategory(@RequestBody Category category){
         return ResponseEntity.ok(categoryService.updateCategory(category));
     }

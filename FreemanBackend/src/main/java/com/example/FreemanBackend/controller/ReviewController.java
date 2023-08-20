@@ -18,7 +18,7 @@ public class ReviewController {
     @Autowired
     ReviewService reviewService;
 
-    @PostMapping("/insert")
+    @PostMapping("/")
     public ResponseEntity<Review> insertReview(@RequestParam("product_id") Integer productId, @RequestParam("userId") Integer userId, @RequestBody Review review) {
         return ResponseEntity.ok(reviewService.insertReview(review, userId, productId));
     }
