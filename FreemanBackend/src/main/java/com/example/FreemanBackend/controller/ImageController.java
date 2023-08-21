@@ -5,6 +5,7 @@ import com.example.FreemanBackend.service.image_service.ImageService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,29 +36,12 @@ public class ImageController {
     @Value("${user.dir}/uploads")
     private String uploadDirectory;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> displayImageById(@PathVariable long id) throws IOException, SQLException {
-        ImageData image = imageService.getImageById(id);
-        byte[] imageBytes = null;
-        imageBytes = image.getImage().getBytes(1, (int) image.getImage().length());
-        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-    }
-
-//    @GetMapping("/all")
-//    public ResponseEntity<List<byte[]>> getAllImage() {
-//        List<ImageData> imageList = imageService.getAllImage();
-//        List<byte[]> imageBytesList = new ArrayList<>();
-//
-//        for (ImageData image : imageList) {
-//            byte[] bytes = convertImageToBytes(image);
-//            if (bytes != null)
-//                imageBytesList.add(bytes);
-//        }
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_JPEG);
-//
-//        return new ResponseEntity<>(imageBytesList, headers, HttpStatus.OK);
+//    @GetMapping("/{id}")
+//    public ResponseEntity<byte[]> displayImageById(@PathVariable long id) throws IOException, SQLException {
+//        ImageData image = imageService.getImageById(id);
+//        byte[] imageBytes = null;
+//        imageBytes = image.getImage().getBytes(1, (int) image.getImage().length());
+//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
 //    }
 
     @PostMapping("/upload")
@@ -71,15 +55,10 @@ public class ImageController {
         return ResponseEntity.ok().body(uploadedImage);
     }
 
-    @PostMapping("/uploadToPath")
+    @PostMapping("/")
     public ResponseEntity<String> uploadImageToPath(HttpServletRequest request, @RequestParam("image") MultipartFile file) throws IOException, SerialException, SQLException {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().body("Please select a file to upload.");
-        }
-
-        File directory = new File(uploadDirectory);
-        if (!directory.exists()) {
-            directory.mkdirs();
         }
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
@@ -89,7 +68,7 @@ public class ImageController {
             outputStream.write(file.getBytes());
         }
 
-        return ResponseEntity.ok().body(filePath);
+        return ResponseEntity.ok().body(getFullImageUrl(request, fileName));
     }
 
     private byte[] convertImageToBytes(ImageData imageData) {
@@ -98,5 +77,28 @@ public class ImageController {
         } catch (SQLException ignored) {
             return null;
         }
+    }
+    private String getFullImageUrl(HttpServletRequest request, String imageName) {
+        String scheme = request.getScheme();
+        String serverName = request.getServerName();
+        int portNumber = request.getServerPort();
+        String contextPath = request.getContextPath();
+
+        return scheme + "://" + serverName + ":" + portNumber + contextPath + "/image/" + imageName;
+    }
+
+    @GetMapping("/{imageName}")
+    public ResponseEntity<FileSystemResource> getImage(@PathVariable String imageName) throws IOException {
+        String filePath = uploadDirectory + "/" + imageName;
+
+        File imageFile = new File(filePath);
+        if (!imageFile.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(new FileSystemResource(imageFile));
     }
 }

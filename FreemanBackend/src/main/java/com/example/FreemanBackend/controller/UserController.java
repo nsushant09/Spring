@@ -1,5 +1,6 @@
 package com.example.FreemanBackend.controller;
 
+import com.example.FreemanBackend.core.ErrorResponseEntity;
 import com.example.FreemanBackend.model.User;
 import com.example.FreemanBackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,11 @@ public class UserController {
     @GetMapping("/by_user_detail")
     public ResponseEntity<?> getUser(@RequestParam("email") String email, @RequestParam("password") String password) {
         if(!userService.existsByEmail(email))
-            return ResponseEntity.badRequest().body("User with the provided email does not exists");
+            return ErrorResponseEntity.get("Invalid email");
 
         User responseUser = userService.getUser(email, password);
         if(responseUser == null)
-            return ResponseEntity.badRequest().body("Invalid Password.");
+            return ErrorResponseEntity.get("Invalid Password");
 
         return ResponseEntity.ok(responseUser);
     }

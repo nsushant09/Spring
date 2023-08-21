@@ -10,4 +10,5 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     public String name;
+    public String imagePath;
 }

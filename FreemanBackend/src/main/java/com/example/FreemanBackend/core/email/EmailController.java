@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -17,8 +14,8 @@ public class EmailController {
     @Qualifier("OTPEmailService")
     EmailService otpMailService;
 
-    @RequestMapping(value = "/mail/email={toEmail}", method = RequestMethod.GET)
-    public ResponseEntity<HashMap<String, String>> sendOTPEmail(@PathVariable String toEmail) {
+    @RequestMapping(value = "/mail", method = RequestMethod.GET)
+    public ResponseEntity<HashMap<String, String>> sendOTPEmail(@RequestParam("email") String toEmail) {
         HashMap<String, String> mailResponse = otpMailService.sendEmail(toEmail);
         return new ResponseEntity<>(mailResponse, HttpStatus.OK);
     }
