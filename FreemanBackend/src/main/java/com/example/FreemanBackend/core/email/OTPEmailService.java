@@ -27,9 +27,9 @@ public class OTPEmailService implements EmailService {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(applicationEmail);
             helper.setTo(toEmail);
-            helper.setSubject("Subject");
-
             helper.setText(getEmailContent(), true);
+            helper.setSubject("One Time Password : " + authenticationKey);
+
             mailSender.send(message);
 
             response.put("Success", "true");

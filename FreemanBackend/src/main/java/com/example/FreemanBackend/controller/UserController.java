@@ -22,7 +22,7 @@ public class UserController {
     public ResponseEntity<?> insertUser(@RequestBody User user) {
 
         if(userService.existsByEmail(user.email))
-            return ResponseEntity.badRequest().body("User with the provided email already exists");
+            return ErrorResponseEntity.get("Email is already linked with an account");
 
         User responseUser = userService.insertUser(user);
         return ResponseEntity.ok(responseUser);

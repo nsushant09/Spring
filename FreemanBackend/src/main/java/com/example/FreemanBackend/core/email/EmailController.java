@@ -14,7 +14,7 @@ public class EmailController {
     @Qualifier("OTPEmailService")
     EmailService otpMailService;
 
-    @RequestMapping(value = "/mail", method = RequestMethod.GET)
+    @RequestMapping(value = "/mailOtp", method = RequestMethod.GET)
     public ResponseEntity<HashMap<String, String>> sendOTPEmail(@RequestParam("email") String toEmail) {
         HashMap<String, String> mailResponse = otpMailService.sendEmail(toEmail);
         return new ResponseEntity<>(mailResponse, HttpStatus.OK);
