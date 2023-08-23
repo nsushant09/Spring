@@ -30,9 +30,9 @@ public class ProductController {
     private CategoryService categoryService;
 
     @PostMapping("/")
-    public ResponseEntity<Product> insertProduct(@RequestParam("user_id") Integer userId, @RequestParam("category_id") Integer categoryId, @RequestBody Product product) {
-        product.category = categoryService.getCategoryById(categoryId);
-        product.user = userService.getUserById(userId);
+    public ResponseEntity<Product> insertProduct(@RequestParam("user_id") String userId, @RequestParam("category_id") String categoryId, @RequestBody Product product) {
+        product.category = categoryService.getCategoryById(Integer.parseInt(categoryId));
+        product.user = userService.getUserById(Integer.parseInt(userId));
         Product responseProduct = productService.insertProduct(product);
         return ResponseEntity.ok(responseProduct);
     }
