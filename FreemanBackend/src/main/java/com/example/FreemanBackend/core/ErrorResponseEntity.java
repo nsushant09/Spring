@@ -5,6 +5,6 @@ import org.springframework.http.ResponseEntity;
 
 public class ErrorResponseEntity {
     static public ResponseEntity<String> get(String message) {
-        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).header("errorMessage", message).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).header("errorMessage", message).build();
     }
 }

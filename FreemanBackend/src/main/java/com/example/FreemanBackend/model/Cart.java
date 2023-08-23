@@ -13,7 +13,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User user;
 
@@ -23,6 +23,6 @@ public class Cart {
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products = new ArrayList<>();
+    public List<Product> products = new ArrayList<>();
 
 }

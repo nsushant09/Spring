@@ -1,6 +1,8 @@
 package com.example.FreemanBackend.service;
 
+import com.example.FreemanBackend.model.Cart;
 import com.example.FreemanBackend.model.User;
+import com.example.FreemanBackend.repository.CartRepository;
 import com.example.FreemanBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     public User insertUser(User user) {
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        Cart cart = new Cart();
+        cart.user = savedUser;
+
+        cartRepository.save(cart);
+        //TODO : Save favourites as well
+        return savedUser;
     }
 
     public User updateUser(User user) {

@@ -13,7 +13,7 @@ public class Favourite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User user;
 
@@ -23,5 +23,5 @@ public class Favourite {
             joinColumns = @JoinColumn(name = "favourite_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products = new ArrayList<>();
+    public List<Product> products = new ArrayList<>();
 }
