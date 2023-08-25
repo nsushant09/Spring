@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/product")
@@ -66,6 +67,12 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductByUser(@RequestParam("user_id") Integer userId) {
         User user = userService.getUserById(userId);
         List<Product> products = productService.getProductByUser(user);
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Set<Product>> getProductBySearchValue(@RequestParam("value") String value){
+        Set<Product> products = productService.getProductBySearchValue(value);
         return ResponseEntity.ok(products);
     }
 

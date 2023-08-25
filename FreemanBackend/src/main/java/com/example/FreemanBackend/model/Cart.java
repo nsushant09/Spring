@@ -3,8 +3,7 @@ package com.example.FreemanBackend.model;
 import com.example.FreemanBackend.core.Constants;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = Constants.CART_TABLE)
@@ -23,6 +22,5 @@ public class Cart {
             joinColumns = @JoinColumn(name = "cart_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    public List<Product> products = new ArrayList<>();
-
+    public Set<Product> products = new LinkedHashSet<>();
 }

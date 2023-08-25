@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,5 +49,9 @@ public class ProductService {
 
     public List<Product> getProductByUser(User user) {
         return productRepository.findByUser(user).stream().peek(Product::convertToDTO).collect(Collectors.toList());
+    }
+
+    public Set<Product> getProductBySearchValue(String value){
+        return productRepository.findByProductNameOrCategoryName(value);
     }
 }

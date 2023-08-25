@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CartService {
@@ -57,7 +58,7 @@ public class CartService {
         return null;
     }
 
-    public List<Product> getAllProductsFromCart(Integer userId){
+    public Set<Product> getAllProductsFromCart(Integer userId){
         User user = userRepository.findById(userId).orElse(null);
         if(user == null) {
             return null;

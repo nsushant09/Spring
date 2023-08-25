@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FavouriteService {
@@ -57,7 +58,7 @@ public class FavouriteService {
         return null;
     }
 
-    public List<Product> getAllProductsFromFavourite(Integer userId){
+    public Set<Product> getAllProductsFromFavourite(Integer userId){
         User user = userRepository.findById(userId).orElse(null);
         if(user == null) {
             return null;

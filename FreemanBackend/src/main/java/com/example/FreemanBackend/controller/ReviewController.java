@@ -19,7 +19,7 @@ public class ReviewController {
     ReviewService reviewService;
 
     @PostMapping("/")
-    public ResponseEntity<Review> insertReview(@RequestParam("product_id") Integer productId, @RequestParam("userId") Integer userId, @RequestBody Review review) {
+    public ResponseEntity<Review> insertReview(@RequestParam("product_id") Integer productId, @RequestParam("user_id") Integer userId, @RequestBody Review review) {
         return ResponseEntity.ok(reviewService.insertReview(review, userId, productId));
     }
 

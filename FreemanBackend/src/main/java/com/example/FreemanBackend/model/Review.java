@@ -13,7 +13,7 @@ public class Review {
     public Integer id;
     public String description;
     public Integer rating;
-    public Date date;
+    public String date;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User user;

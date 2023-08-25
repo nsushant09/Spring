@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/cart")
@@ -42,7 +43,7 @@ public class CartController{
 
     @GetMapping("/cart_products")
     ResponseEntity<?> getAllProductsFromCart(@RequestParam("user_id") Integer userId){
-        List<Product> products = cartService.getAllProductsFromCart(userId);
+        Set<Product> products = cartService.getAllProductsFromCart(userId);
         return ResponseEntity.ok().body(products);
     }
 

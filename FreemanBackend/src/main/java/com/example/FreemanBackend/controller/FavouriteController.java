@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/favourite")
@@ -27,7 +28,7 @@ public class FavouriteController {
         if(favourite == null){
             return ErrorResponseEntity.get("Product or User not found");
         }
-        return ResponseEntity.ok().body(favourite);
+        return ResponseEntity.ok().body(favourite.products);
     }
 
     @PostMapping("/remove")
@@ -36,12 +37,12 @@ public class FavouriteController {
         if(favourite == null){
             return ErrorResponseEntity.get("Product or User not found");
         }
-        return ResponseEntity.ok().body(favourite);
+        return ResponseEntity.ok().body(favourite.products);
     }
 
     @GetMapping("/favourite_products")
     ResponseEntity<?> getAllProductsFromFavourite(@RequestParam("user_id") Integer userId){
-        List<Product> products = favouriteService.getAllProductsFromFavourite(userId);
+        Set<Product> products = favouriteService.getAllProductsFromFavourite(userId);
         return ResponseEntity.ok().body(products);
     }
 
