@@ -25,15 +25,15 @@ public class ReviewService {
     @Autowired
     ProductService productService;
 
-    public Review insertReview(Review review, Integer userId, Integer productId){
-        User user =  userService.getUserById(userId);
-        Product product = productService.getProductById(productId);
+    public Review insertReview(Review review, Integer userId, Integer productId) {
+        User user = userService.getUserById(userId);
+        Product product = productService.getOrignalProductById(productId);
         review.user = user;
         review.product = product;
         return reviewRepository.save(review);
     }
 
-    public List<Review> findByProductId(Integer productId){
+    public List<Review> findByProductId(Integer productId) {
         return reviewRepository.findByProductId(productId);
     }
 }

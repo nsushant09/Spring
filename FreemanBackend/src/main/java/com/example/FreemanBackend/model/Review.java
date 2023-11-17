@@ -22,12 +22,6 @@ public class Review {
     @JoinColumn(name = "product_id")
     public Product product;
 
-    public void convertToDTO() {
-        if (this.user == null)
-            return;
-
-        this.user.convertToDTO();
-    }
 }
 
 /**

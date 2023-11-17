@@ -1,5 +1,6 @@
 package com.example.FreemanBackend.controller;
 
+import com.example.FreemanBackend.dto_model.ProductDTO;
 import com.example.FreemanBackend.model.Category;
 import com.example.FreemanBackend.model.Product;
 import com.example.FreemanBackend.model.User;
@@ -45,33 +46,33 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Product>> getAllProduct() {
-        List<Product> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProduct() {
+        List<ProductDTO> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/by_product_id")
-    public ResponseEntity<Product> getProductById(@RequestParam("product_id") Integer productId) {
-        Product product = productService.getProductById(productId);
+    public ResponseEntity<ProductDTO> getProductById(@RequestParam("product_id") Integer productId) {
+        ProductDTO product = productService.getProductById(productId);
         return ResponseEntity.ok(product);
     }
 
     @GetMapping("/by_category_id")
-    public ResponseEntity<List<Product>> getProductByCategory(@RequestParam("category_id") Integer categoryId) {
+    public ResponseEntity<List<ProductDTO>> getProductByCategory(@RequestParam("category_id") Integer categoryId) {
         Category category = categoryService.getCategoryById(categoryId);
-        List<Product> products = productService.getProductByCategory(category);
+        List<ProductDTO> products = productService.getProductByCategory(category);
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/by_user_id")
-    public ResponseEntity<List<Product>> getProductByUser(@RequestParam("user_id") Integer userId) {
+    public ResponseEntity<List<ProductDTO>> getProductByUser(@RequestParam("user_id") Integer userId) {
         User user = userService.getUserById(userId);
-        List<Product> products = productService.getProductByUser(user);
+        List<ProductDTO> products = productService.getProductByUser(user);
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/search")
-    public ResponseEntity<Set<Product>> getProductBySearchValue(@RequestParam("value") String value){
+    public ResponseEntity<Set<Product>> getProductBySearchValue(@RequestParam("value") String value) {
         Set<Product> products = productService.getProductBySearchValue(value);
         return ResponseEntity.ok(products);
     }

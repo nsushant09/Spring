@@ -25,10 +25,4 @@ public class Product {
     @JoinColumn(name = "category_id")
     public Category category;
 
-    public void convertToDTO() {
-        if (this.user == null)
-            return;
-
-        this.user.convertToDTO();
-    }
 }
