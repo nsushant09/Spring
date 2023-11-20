@@ -20,5 +20,7 @@ public class Mapper {
         return new ReviewDTO(review.id, review.description, review.rating, review.date, Mapper.toDto(review.user));
     }
 
-
+    public static AuthenticatedUserDTO toDTO(User user, String token) {
+        return new AuthenticatedUserDTO(user.id, user.name, user.email, user.gender, user.phoneNumber, user.dateOfBirth, user.role, token);
+    }
 }
