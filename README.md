@@ -1,3 +1,6 @@
+In src/main/resource
+
+
 /* Create a file mysql-root-credentials.yml */
 
 apiVersion: v1
