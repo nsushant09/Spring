@@ -2,6 +2,8 @@ package com.example.FreemanBackend.model;
 
 import com.example.FreemanBackend.core.Constants;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.*;
 

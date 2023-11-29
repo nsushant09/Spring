@@ -36,24 +36,6 @@ public class ImageController {
     @Value("${user.dir}/uploads")
     private String uploadDirectory;
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<byte[]> displayImageById(@PathVariable long id) throws IOException, SQLException {
-//        ImageData image = imageService.getImageById(id);
-//        byte[] imageBytes = null;
-//        imageBytes = image.getImage().getBytes(1, (int) image.getImage().length());
-//        return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
-//    }
-
-    @PostMapping("/upload")
-    public ResponseEntity<ImageData> uploadImage(HttpServletRequest request, @RequestParam("image") MultipartFile file) throws IOException, SerialException, SQLException {
-        byte[] bytes = file.getBytes();
-        Blob blob = new javax.sql.rowset.serial.SerialBlob(bytes);
-
-        ImageData image = new ImageData();
-        image.setImage(blob);
-        ImageData uploadedImage = imageService.uploadImage(image);
-        return ResponseEntity.ok().body(uploadedImage);
-    }
 
     @PostMapping("/")
     public ResponseEntity<String> uploadImageToPath(HttpServletRequest request, @RequestParam("image") MultipartFile file) throws IOException, SerialException, SQLException {
@@ -71,20 +53,8 @@ public class ImageController {
         return ResponseEntity.ok().body(getFullImageUrl(request, fileName));
     }
 
-    private byte[] convertImageToBytes(ImageData imageData) {
-        try {
-            return imageData.getImage().getBytes(1, (int) imageData.getImage().length());
-        } catch (SQLException ignored) {
-            return null;
-        }
-    }
     private String getFullImageUrl(HttpServletRequest request, String imageName) {
-        String scheme = request.getScheme();
-        String serverName = request.getServerName();
-        int portNumber = request.getServerPort();
-        String contextPath = request.getContextPath();
-
-        return scheme + "://" + serverName + ":" + portNumber + contextPath + "/image/" + imageName;
+        return "/image/" + imageName;
     }
 
     @GetMapping("/{imageName}")

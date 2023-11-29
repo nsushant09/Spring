@@ -1,7 +1,9 @@
 package com.example.FreemanBackend.dto_model;
 
+import com.example.FreemanBackend.model.Role;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
+import java.sql.Date;
 
 @AllArgsConstructor
 public class UserDTO {
@@ -10,6 +12,6 @@ public class UserDTO {
     public String email;
     public String gender;
     public String phoneNumber;
-    public String dateOfBirth;
-    public String role;
+    public Date dateOfBirth;
+    public Role role;
 }

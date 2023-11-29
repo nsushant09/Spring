@@ -21,6 +21,6 @@ public class Mapper {
     }
 
     public static AuthenticatedUserDTO toDTO(User user, String token) {
-        return new AuthenticatedUserDTO(user.id, user.name, user.email, user.gender, user.phoneNumber, user.dateOfBirth, user.role, token);
+        return new AuthenticatedUserDTO(user.id, user.name, user.email, user.gender, user.phoneNumber, user.dateOfBirth, user.role);
     }
 }

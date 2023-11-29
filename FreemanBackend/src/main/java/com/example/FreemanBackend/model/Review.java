@@ -2,9 +2,13 @@ package com.example.FreemanBackend.model;
 
 import com.example.FreemanBackend.core.Constants;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
 import java.sql.Date;
 
+@Data
+@Builder
 @Entity
 @Table(name = Constants.REVIEW_TABLE)
 public class Review {
