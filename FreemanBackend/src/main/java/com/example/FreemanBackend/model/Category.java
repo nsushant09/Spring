@@ -9,6 +9,7 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
+    @Column(unique = true)
     public String name;
     public String imagePath;
 }
