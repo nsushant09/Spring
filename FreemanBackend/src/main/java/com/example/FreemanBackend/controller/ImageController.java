@@ -16,11 +16,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
 import javax.sql.rowset.serial.SerialException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,6 +40,7 @@ public class ImageController {
 
     @Value("${user.dir}/uploads")
     private String uploadDirectory;
+
 
 
     @PostMapping("/")
@@ -71,4 +77,5 @@ public class ImageController {
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(new FileSystemResource(imageFile));
     }
+
 }

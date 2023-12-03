@@ -17,7 +17,11 @@ public class SqlScriptInitializer {
     private DataSource dataSource;
 
     @PostConstruct
-    public void initData() throws IOException, SQLException{
+    public void initData() throws Exception{
+        prepopulateData();
+    }
+
+    private void prepopulateData() throws SQLException {
         Resource sqlResource = new ClassPathResource("data.sql");
         ScriptUtils.executeSqlScript(dataSource.getConnection(), sqlResource);
     }

@@ -26,8 +26,12 @@ public class UserController {
         if (userService.existsByEmail(user.email))
             return ErrorResponseEntity.get("Email is already linked with an account");
 
+        if (user.id != null && user.id == -1) {
+            user.id = null;
+        }
+
         User responseUser = userService.insertUser(user);
-        return ResponseEntity.ok(Mapper.toDto(user));
+        return ResponseEntity.ok(Mapper.toDto(responseUser));
     }
 
     @PutMapping("/")
