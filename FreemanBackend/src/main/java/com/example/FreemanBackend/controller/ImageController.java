@@ -38,7 +38,7 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
-    @Value("${user.dir}/uploads")
+    @Value("${user.home}/imageUploads")
     private String uploadDirectory;
 
 
