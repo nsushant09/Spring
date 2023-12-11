@@ -42,7 +42,7 @@ public class ProductService {
         return product.map(Mapper::toDto).orElse(null);
     }
 
-    public Product getOrignalProductById(Integer id){
+    public Product getOrignalProductById(Integer id) {
         Optional<Product> product = productRepository.findById(id);
         return product.orElse(null);
     }
